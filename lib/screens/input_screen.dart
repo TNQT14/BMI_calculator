@@ -1,5 +1,6 @@
 import 'package:bmi_calculator/component/icon_content.dart';
 import 'package:bmi_calculator/component/reusable_card.dart';
+import 'package:bmi_calculator/component/round_icon_button.dart';
 import 'package:bmi_calculator/constants/app_styles.dart';
 import 'package:flutter/material.dart';
 
@@ -32,7 +33,7 @@ class _InputScreenState extends State<InputScreen> {
            icon: const Icon(Icons.refresh))
         ],
       ),
-      body: const Column(
+      body: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: <Widget>[
           Expanded(
@@ -81,11 +82,69 @@ class _InputScreenState extends State<InputScreen> {
                           'cm',
                           style: kLabelTextStyle,
                         ),
-                      
+
                       ],
                   ),
                 ],
               ),)
+          ),
+          Expanded(
+            child: Row(
+              children: <Widget>[
+                Expanded(
+                  child: ReusableCard(
+                    color: kActiveCardColour,
+                    cardChild: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: <Widget>[
+                        const Text(
+                            'Weight',
+                            style: kLabelTextStyle,
+                          ),
+                          const Text(
+                            '60',
+                            style: kNumberTextStyle,
+                          ),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: <Widget>[
+                              RoundIconButton(icon: Icons.add,
+                               onPressed: (){}),
+                               RoundIconButton(icon: Icons.remove,
+                               onPressed: (){})
+                            ],
+                          ),
+                      ],
+                    ),),
+                ),
+              Expanded(
+                  child: ReusableCard(
+                    color: kActiveCardColour,
+                    cardChild: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: <Widget>[
+                        const Text(
+                            'Age',
+                            style: kLabelTextStyle,
+                          ),
+                          const Text(
+                            '30',
+                            style: kNumberTextStyle,
+                          ),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: <Widget>[
+                              RoundIconButton(icon: Icons.add,
+                               onPressed: (){}),
+                               RoundIconButton(icon: Icons.remove,
+                               onPressed: (){})
+                            ],
+                          ),
+                      ],
+                    ),),
+                ),
+              ],
+            ),
           ),
         ],
       ),
