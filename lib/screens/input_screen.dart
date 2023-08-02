@@ -16,13 +16,15 @@ class InputScreen extends StatefulWidget {
 
 class _InputScreenState extends State<InputScreen> {
 
+  int height = 180;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: AppColors.appPrimaryColor,
       appBar: AppBar(
-        // backgroundColor: AppColors.cetaceanBlue,
-        title: const Center(child: Text("BMI CALCULATOR")),
+        backgroundColor: AppColors.appPrimaryColor,
+        title: const Center(child: Text("BMI CALCULATOR",
+        style: kLargeButtonTextStyle,)),
         elevation: 0,
         leading: IconButton(
           icon: const Icon(Icons.history),
@@ -37,16 +39,18 @@ class _InputScreenState extends State<InputScreen> {
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: <Widget>[
-          Expanded(
+          const Expanded(
             child: Row(
               children: <Widget>[
                 Expanded(
                   child: ReusableCard(
                     color: kInactiveCardColour,
-                    cardChild: IconContent(
-                      color: Colors.white,
-                      icon: Icons.male,
-                      label: 'MALE',
+                    cardChild: Center(
+                      child: IconContent(
+                        color: Colors.white,
+                        icon: Icons.male,
+                        label: 'MALE',
+                      ),
                     ),
                   ),
                 ),
@@ -69,7 +73,7 @@ class _InputScreenState extends State<InputScreen> {
               cardChild: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
-                  Text("Height",
+                  const Text("Height",
                     style: kLabelTextStyle,
                   ),
                   Row(
@@ -77,15 +81,34 @@ class _InputScreenState extends State<InputScreen> {
                       crossAxisAlignment: CrossAxisAlignment.baseline,
                       textBaseline: TextBaseline.alphabetic,
                       children: <Widget>[
-                        Text("180",
+                        Text(height.toString(),
                           style: kNumberTextStyle,),
-                        Text(
+                        const Text(
                           'cm',
                           style: kLabelTextStyle,
                         ),
-
                       ],
                   ),
+                   SliderTheme(data: SliderTheme.of(context).copyWith(
+                        inactiveTrackColor: const Color(0xFF8D8E98),
+                        activeTrackColor: Colors.white,
+                        thumbColor: const Color(0xFFEB1555),
+                        overlayColor: const Color(0x29EB1555),
+                        thumbShape: const RoundSliderThumbShape(
+                            enabledThumbRadius: 15.0),
+                        overlayShape:
+                            const RoundSliderOverlayShape(overlayRadius: 30.0),
+                      ),
+                         child:  Slider(
+                        value: height.toDouble(),
+                        min: 120.0,
+                        max: 220.0,
+                        onChanged: (double newValue) {
+                          setState(() {
+                            height = newValue.round();
+                          });
+                        },
+                      ),),
                 ],
               ),)
           ),
