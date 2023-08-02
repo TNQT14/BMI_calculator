@@ -1,3 +1,4 @@
+import 'package:bmi_calculator/component/bottom_button.dart';
 import 'package:bmi_calculator/component/icon_content.dart';
 import 'package:bmi_calculator/component/reusable_card.dart';
 import 'package:bmi_calculator/component/round_icon_button.dart';
@@ -109,9 +110,10 @@ class _InputScreenState extends State<InputScreen> {
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: <Widget>[
                               RoundIconButton(icon: Icons.add,
-                               onPressed: (){}),
-                               RoundIconButton(icon: Icons.remove,
-                               onPressed: (){})
+                              onPressed: (){}),
+                              const SizedBox(width: 10),
+                              RoundIconButton(icon: Icons.remove,
+                              onPressed: (){})
                             ],
                           ),
                       ],
@@ -135,17 +137,22 @@ class _InputScreenState extends State<InputScreen> {
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: <Widget>[
                               RoundIconButton(icon: Icons.add,
-                               onPressed: (){}),
-                               RoundIconButton(icon: Icons.remove,
-                               onPressed: (){})
+                              onPressed: (){}),
+                              const SizedBox(width: 10),
+                              RoundIconButton(icon: Icons.remove,
+                              onPressed: (){})
                             ],
                           ),
                       ],
-                    ),),
+                    ),
+                  ),
                 ),
               ],
             ),
           ),
+          BottomButton(
+                onTap: (){},
+                buttonTitle: 'CALCULATE'),
         ],
       ),
     );
