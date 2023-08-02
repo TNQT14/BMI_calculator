@@ -1,4 +1,5 @@
 import 'package:bmi_calculator/screens/input_screen.dart';
+import 'package:bmi_calculator/screens/splash_screen.dart';
 // import 'package:bmi_calculator/screens/splash_screen.dart';
 import 'package:flutter/material.dart';
 

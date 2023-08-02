@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import '../constants/app_color.dart';
 import '../constants/app_image_app.dart';
 import '../utils/widget_utils.dart';
+import 'input_screen.dart';
 
 
 class SplashScreen extends StatefulWidget {
@@ -14,7 +15,7 @@ class SplashScreen extends StatefulWidget {
 class _SplashScreenState extends State<SplashScreen>
     with SingleTickerProviderStateMixin {
   late AnimationController _submitAnimationController;
-  static const int duration = 5;
+  static const int duration = 1;
 
   @override
   initState() {
@@ -22,16 +23,8 @@ class _SplashScreenState extends State<SplashScreen>
     _submitAnimationController = AnimationController(
       vsync: this,
       duration: const Duration(seconds: duration),
+    
     );
-
-        
-
-    // _submitAnimationController.addStatusListener((status) {
-    //   if (status == AnimationStatus.completed) {
-    //     Navigator.pushReplacementNamed(context, RouteGenerator.inputPage)
-    //         .then((value) => _submitAnimationController.reset());
-    //   }
-    // });
   }
 
   @override
