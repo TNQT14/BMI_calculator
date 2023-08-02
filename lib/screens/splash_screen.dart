@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import '../constants/app_color.dart';
 import '../constants/app_image_app.dart';
+import '../utils/widget_utils.dart';
 
 
 class SplashScreen extends StatefulWidget {
@@ -84,18 +85,18 @@ class _SplashScreenState extends State<SplashScreen>
                   fontWeight: FontWeight.w500,
                 ),
               ),
-              // Padding(
-              //   padding: EdgeInsets.only(
-              //     left: screenAwareSize(16.0, context),
-              //     right: screenAwareSize(16.0, context),
-              //     bottom: screenAwareSize(22.0, context),
-              //     top: screenAwareSize(14.0, context),
-              //   ),
-              //   child: PacmanSlider(
-              //     submitAnimationController: _submitAnimationController,
-              //     onSubmit: onPacmanSubmit,
-              //   ),
-              // ),
+              Padding(
+                padding: EdgeInsets.only(
+                  left: screenAwareSize(16.0, context),
+                  right: screenAwareSize(16.0, context),
+                  bottom: screenAwareSize(22.0, context),
+                  top: screenAwareSize(14.0, context),
+                ),
+                // child: PacmanSlider(
+                //   submitAnimationController: _submitAnimationController,
+                //   onSubmit: onPacmanSubmit,
+                // ),
+              ),
             ],
           ),
         ),
