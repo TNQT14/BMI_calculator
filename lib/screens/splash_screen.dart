@@ -24,6 +24,8 @@ class _SplashScreenState extends State<SplashScreen>
       duration: const Duration(seconds: duration),
     );
 
+        
+
     // _submitAnimationController.addStatusListener((status) {
     //   if (status == AnimationStatus.completed) {
     //     Navigator.pushReplacementNamed(context, RouteGenerator.inputPage)
