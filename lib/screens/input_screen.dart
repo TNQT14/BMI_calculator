@@ -220,73 +220,91 @@ class _InputScreenState extends State<InputScreen> with SingleTickerProviderStat
             child: Row(
               children: <Widget>[
                 Expanded(
-                  child: ReusableCard(
-                    color: kActiveCardColour,
-                    cardChild: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: <Widget>[
-                        const Text(
-                            'Weight',
-                            style: kLabelTextStyle,
-                          ),
-                          Text(
-                            weight.toString(),
-                            style: kNumberTextStyle,
-                          ),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: <Widget>[
-                              RoundIconButton(icon: Icons.remove,
-                              onPressed: (){
-                                setState(() {
-                                  weight--;
-                                });
-                              }),
-                              const SizedBox(width: 10),
-                              RoundIconButton(icon: Icons.add,
-                              onPressed: (){
-                                setState(() {
-                                  weight++;
-                                });
-                              })
-                            ],
-                          ),
-                      ],
-                    ),),
+                  child: AnimatedBuilder(
+                    animation: controller,
+                    builder: (context, Widget? child){
+                      return Transform.translate(
+                        offset: Offset(controller.value*200, 0),
+                        child: child,
+                      );
+                    },
+                    child: ReusableCard(
+                      color: kActiveCardColour,
+                      cardChild: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: <Widget>[
+                          const Text(
+                              'Weight',
+                              style: kLabelTextStyle,
+                            ),
+                            Text(
+                              weight.toString(),
+                              style: kNumberTextStyle,
+                            ),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: <Widget>[
+                                RoundIconButton(icon: Icons.remove,
+                                onPressed: (){
+                                  setState(() {
+                                    weight--;
+                                  });
+                                }),
+                                const SizedBox(width: 10),
+                                RoundIconButton(icon: Icons.add,
+                                onPressed: (){
+                                  setState(() {
+                                    weight++;
+                                  });
+                                })
+                              ],
+                            ),
+                        ],
+                      ),),
+                  ),
                 ),
               Expanded(
-                  child: ReusableCard(
-                    color: kActiveCardColour,
-                    cardChild: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: <Widget>[
-                        const Text(
-                            'Age',
-                            style: kLabelTextStyle,
-                          ),
-                          Text(
-                            age.toString(),
-                            style: kNumberTextStyle,
-                          ),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: <Widget>[
-                              RoundIconButton(icon: Icons.remove,
-                              onPressed: (){
-                                setState(() {
-                                  age--;
-                                });
-                              }),
-                              const SizedBox(width: 10),
-                              RoundIconButton(icon: Icons.add,
-                              onPressed: (){
-                                setState(() {
-                                  age++;
-                                });
-                              })
-                            ],
-                          ),
-                      ],
+                  child: AnimatedBuilder(
+                    animation: controller,
+                    builder: (context, Widget? child){
+                      return Transform.translate(
+                        offset: Offset(controller.value*-200, 0),
+                        child: child,
+                      );
+                    },
+                    child: ReusableCard(
+                      color: kActiveCardColour,
+                      cardChild: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: <Widget>[
+                          const Text(
+                              'Age',
+                              style: kLabelTextStyle,
+                            ),
+                            Text(
+                              age.toString(),
+                              style: kNumberTextStyle,
+                            ),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: <Widget>[
+                                RoundIconButton(icon: Icons.remove,
+                                onPressed: (){
+                                  setState(() {
+                                    age--;
+                                  });
+                                }),
+                                const SizedBox(width: 10),
+                                RoundIconButton(icon: Icons.add,
+                                onPressed: (){
+                                  setState(() {
+                                    age++;
+                                  });
+                                })
+                              ],
+                            ),
+                        ],
+                      ),
                     ),
                   ),
                 ),
