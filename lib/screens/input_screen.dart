@@ -6,6 +6,7 @@ import 'package:bmi_calculator/constants/app_styles.dart';
 import 'package:flutter/material.dart';
 
 import '../constants/app_color.dart';
+import '../model/gender.dart';
 
 class InputScreen extends StatefulWidget {
   const InputScreen({super.key});
@@ -14,9 +15,31 @@ class InputScreen extends StatefulWidget {
   State<InputScreen> createState() => _InputScreenState();
 }
 
-class _InputScreenState extends State<InputScreen> {
+class _InputScreenState extends State<InputScreen> with SingleTickerProviderStateMixin {
 
+  Gender selectedGender = Gender.other;
   int height = 180;
+  int weight = 60;
+  int age = 20;
+
+  late AnimationController controller;
+
+  @override
+  void initState() {
+    super.initState();
+    controller = AnimationController(
+      vsync: this,
+      duration: const Duration(seconds: 1),
+      lowerBound: -1,
+      upperBound: 0,
+    );
+    controller.animateTo(
+      0,
+      curve: Curves.easeOut,
+      duration: const Duration(seconds: 1),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -29,6 +52,12 @@ class _InputScreenState extends State<InputScreen> {
         leading: IconButton(
           icon: const Icon(Icons.history),
           onPressed: () {
+            setState(() {
+              selectedGender = Gender.other;
+              height = 180;
+              weight = 60;
+              age = 20;
+            });
           },
         ),
         actions: [
@@ -39,15 +68,24 @@ class _InputScreenState extends State<InputScreen> {
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: <Widget>[
-          const Expanded(
+          Expanded(
             child: Row(
               children: <Widget>[
                 Expanded(
                   child: ReusableCard(
-                    color: kInactiveCardColour,
+                    onPress: (){
+                      setState(() {
+                        selectedGender = Gender.male;
+                      });
+                    },
+                    color: selectedGender == Gender.male
+                        ? kActiveCardColour
+                        : kInactiveCardColour,
                     cardChild: Center(
                       child: IconContent(
-                        color: Colors.white,
+                        color: selectedGender == Gender.male
+                          ? Colors.blueAccent
+                          : Colors.white,
                         icon: Icons.male,
                         label: 'MALE',
                       ),
@@ -56,9 +94,18 @@ class _InputScreenState extends State<InputScreen> {
                 ),
                 Expanded(
                   child: ReusableCard(
-                    color: kInactiveCardColour,
+                    onPress: (){
+                      setState(() {
+                        selectedGender = Gender.female;
+                      });
+                    },
+                    color: selectedGender == Gender.female
+                        ? kActiveCardColour
+                        : kInactiveCardColour,
                     cardChild: IconContent(
-                      color: Colors.white,
+                      color: selectedGender == Gender.female
+                          ? Colors.orange
+                          : Colors.white,
                       icon: Icons.female,
                       label: 'FEMALE',
                     ),
