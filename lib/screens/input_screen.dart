@@ -3,6 +3,8 @@ import 'package:bmi_calculator/component/icon_content.dart';
 import 'package:bmi_calculator/component/reusable_card.dart';
 import 'package:bmi_calculator/component/round_icon_button.dart';
 import 'package:bmi_calculator/constants/app_styles.dart';
+import 'package:bmi_calculator/services/calculator.dart';
+import 'package:bmi_calculator/utils/widget_utils.dart';
 import 'package:flutter/material.dart';
 
 import '../constants/app_color.dart';
@@ -52,6 +54,10 @@ class _InputScreenState extends State<InputScreen> with SingleTickerProviderStat
         leading: IconButton(
           icon: const Icon(Icons.history),
           onPressed: () {
+          },
+        ),
+        actions: [
+          IconButton(onPressed: (){
             setState(() {
               selectedGender = Gender.other;
               height = 180;
@@ -59,9 +65,6 @@ class _InputScreenState extends State<InputScreen> with SingleTickerProviderStat
               age = 20;
             });
           },
-        ),
-        actions: [
-          IconButton(onPressed: (){},
            icon: const Icon(Icons.refresh))
         ],
       ),
@@ -72,42 +75,58 @@ class _InputScreenState extends State<InputScreen> with SingleTickerProviderStat
             child: Row(
               children: <Widget>[
                 Expanded(
-                  child: ReusableCard(
-                    onPress: (){
-                      setState(() {
-                        selectedGender = Gender.male;
-                      });
+                  child: AnimatedBuilder(
+                    animation: controller,
+                    builder: (BuildContext context, Widget? child){
+                      return Transform.translate(
+                        offset: Offset(controller.value *200, 0),
+                        child: child,
+                        );
                     },
-                    color: selectedGender == Gender.male
-                        ? kActiveCardColour
-                        : kInactiveCardColour,
-                    cardChild: Center(
-                      child: IconContent(
-                        color: selectedGender == Gender.male
-                          ? Colors.blueAccent
-                          : Colors.white,
-                        icon: Icons.male,
-                        label: 'MALE',
-                      ),
+                    child: ReusableCard(
+                      onPress: (){
+                        setState(() {
+                          selectedGender = Gender.male;
+                        });
+                      },
+                      color: selectedGender == Gender.male
+                          ? kActiveCardColour
+                          : kInactiveCardColour,
+                      cardChild: IconContent(
+                          color: selectedGender == Gender.male
+                            ? Colors.blueAccent
+                            : Colors.white,
+                          icon: Icons.male,
+                          label: 'MALE',
+                        ),         
                     ),
                   ),
                 ),
                 Expanded(
-                  child: ReusableCard(
-                    onPress: (){
-                      setState(() {
-                        selectedGender = Gender.female;
-                      });
+                  child: AnimatedBuilder(
+                    animation: controller,
+                    builder: (BuildContext context, Widget? child) {
+                      return Transform.translate(
+                        offset: Offset(controller.value*-200, 0),
+                        child: child,
+                        );
                     },
-                    color: selectedGender == Gender.female
-                        ? kActiveCardColour
-                        : kInactiveCardColour,
-                    cardChild: IconContent(
+                    child: ReusableCard(
+                      onPress: (){
+                        setState(() {
+                          selectedGender = Gender.female;
+                        });
+                      },
                       color: selectedGender == Gender.female
-                          ? Colors.orange
-                          : Colors.white,
-                      icon: Icons.female,
-                      label: 'FEMALE',
+                          ? kActiveCardColour
+                          : kInactiveCardColour,
+                      cardChild: IconContent(
+                        color: selectedGender == Gender.female
+                            ? Colors.orange
+                            : Colors.white,
+                        icon: Icons.female,
+                        label: 'FEMALE',
+                      ),
                     ),
                   ),
                 ),
@@ -181,18 +200,26 @@ class _InputScreenState extends State<InputScreen> with SingleTickerProviderStat
                             'Weight',
                             style: kLabelTextStyle,
                           ),
-                          const Text(
-                            '60',
+                          Text(
+                            weight.toString(),
                             style: kNumberTextStyle,
                           ),
                           Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: <Widget>[
-                              RoundIconButton(icon: Icons.add,
-                              onPressed: (){}),
-                              const SizedBox(width: 10),
                               RoundIconButton(icon: Icons.remove,
-                              onPressed: (){})
+                              onPressed: (){
+                                setState(() {
+                                  weight--;
+                                });
+                              }),
+                              const SizedBox(width: 10),
+                              RoundIconButton(icon: Icons.add,
+                              onPressed: (){
+                                setState(() {
+                                  weight++;
+                                });
+                              })
                             ],
                           ),
                       ],
@@ -208,18 +235,26 @@ class _InputScreenState extends State<InputScreen> with SingleTickerProviderStat
                             'Age',
                             style: kLabelTextStyle,
                           ),
-                          const Text(
-                            '30',
+                          Text(
+                            age.toString(),
                             style: kNumberTextStyle,
                           ),
                           Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: <Widget>[
-                              RoundIconButton(icon: Icons.add,
-                              onPressed: (){}),
-                              const SizedBox(width: 10),
                               RoundIconButton(icon: Icons.remove,
-                              onPressed: (){})
+                              onPressed: (){
+                                setState(() {
+                                  age--;
+                                });
+                              }),
+                              const SizedBox(width: 10),
+                              RoundIconButton(icon: Icons.add,
+                              onPressed: (){
+                                setState(() {
+                                  age++;
+                                });
+                              })
                             ],
                           ),
                       ],
@@ -230,7 +265,17 @@ class _InputScreenState extends State<InputScreen> with SingleTickerProviderStat
             ),
           ),
           BottomButton(
-                onTap: (){},
+                onTap: () async {
+                  if(selectedGender == Gender.other)
+                    showSnackBar(context, "Please choose your Gender");
+                    else 
+                    {
+                      Calculator calc = Calculator(
+                        height: height,
+                        weight: weight,
+                      );
+                    }
+                },
                 buttonTitle: 'CALCULATE'),
         ],
       ),

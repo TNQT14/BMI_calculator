@@ -13,7 +13,6 @@ class ReusableCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: onPress, 
-      child: Container(
         child: Container(
         margin: const EdgeInsets.all(15.0),
         decoration: BoxDecoration(
@@ -21,7 +20,6 @@ class ReusableCard extends StatelessWidget {
           borderRadius: BorderRadius.circular(10.0),
         ),
         child: cardChild,
-      ),
       ),
     );
   }
