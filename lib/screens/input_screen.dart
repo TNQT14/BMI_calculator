@@ -115,49 +115,58 @@ class _InputScreenState extends State<InputScreen> with SingleTickerProviderStat
             ),
           ),
           Expanded(
-            child: ReusableCard(
-              color: kActiveCardColour,
-              cardChild: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: <Widget>[
-                  const Text("Height",
-                    style: kLabelTextStyle,
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                      crossAxisAlignment: CrossAxisAlignment.baseline,
-                      textBaseline: TextBaseline.alphabetic,
-                      children: <Widget>[
-                        Text(height.toString(),
-                          style: kNumberTextStyle,),
-                        const Text(
-                          'cm',
-                          style: kLabelTextStyle,
+            child: AnimatedBuilder(
+              animation: controller,
+              builder: (BuildContext context, Widget? child) {
+                return Transform.translate(
+                  offset: Offset(controller.value * -400, 0),
+                  child: child,
+                );
+              },
+              child: ReusableCard(
+                color: kActiveCardColour,
+                cardChild: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: <Widget>[
+                    const Text("Height",
+                      style: kLabelTextStyle,
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                        crossAxisAlignment: CrossAxisAlignment.baseline,
+                        textBaseline: TextBaseline.alphabetic,
+                        children: <Widget>[
+                          Text(height.toString(),
+                            style: kNumberTextStyle,),
+                          const Text(
+                            'cm',
+                            style: kLabelTextStyle,
+                          ),
+                        ],
+                    ),
+                     SliderTheme(data: SliderTheme.of(context).copyWith(
+                          inactiveTrackColor: const Color(0xFF8D8E98),
+                          activeTrackColor: Colors.white,
+                          thumbColor: const Color(0xFFEB1555),
+                          overlayColor: const Color(0x29EB1555),
+                          thumbShape: const RoundSliderThumbShape(
+                              enabledThumbRadius: 15.0),
+                          overlayShape:
+                              const RoundSliderOverlayShape(overlayRadius: 30.0),
                         ),
-                      ],
-                  ),
-                   SliderTheme(data: SliderTheme.of(context).copyWith(
-                        inactiveTrackColor: const Color(0xFF8D8E98),
-                        activeTrackColor: Colors.white,
-                        thumbColor: const Color(0xFFEB1555),
-                        overlayColor: const Color(0x29EB1555),
-                        thumbShape: const RoundSliderThumbShape(
-                            enabledThumbRadius: 15.0),
-                        overlayShape:
-                            const RoundSliderOverlayShape(overlayRadius: 30.0),
-                      ),
-                         child:  Slider(
-                        value: height.toDouble(),
-                        min: 120.0,
-                        max: 220.0,
-                        onChanged: (double newValue) {
-                          setState(() {
-                            height = newValue.round();
-                          });
-                        },
-                      ),),
-                ],
-              ),)
+                           child:  Slider(
+                          value: height.toDouble(),
+                          min: 120.0,
+                          max: 220.0,
+                          onChanged: (double newValue) {
+                            setState(() {
+                              height = newValue.round();
+                            });
+                          },
+                        ),),
+                  ],
+                ),),
+            )
           ),
           Expanded(
             child: Row(
