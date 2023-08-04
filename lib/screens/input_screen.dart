@@ -3,12 +3,14 @@ import 'package:bmi_calculator/component/icon_content.dart';
 import 'package:bmi_calculator/component/reusable_card.dart';
 import 'package:bmi_calculator/component/round_icon_button.dart';
 import 'package:bmi_calculator/constants/app_styles.dart';
+import 'package:bmi_calculator/screens/result_screen.dart';
 import 'package:bmi_calculator/services/calculator.dart';
 import 'package:bmi_calculator/utils/widget_utils.dart';
 import 'package:flutter/material.dart';
 
 import '../constants/app_color.dart';
 import '../model/gender.dart';
+import '../model/result.dart';
 
 class InputScreen extends StatefulWidget {
   const InputScreen({super.key});
@@ -25,6 +27,32 @@ class _InputScreenState extends State<InputScreen> with SingleTickerProviderStat
   int age = 20;
 
   late AnimationController controller;
+
+  void bmiResult() async {
+
+    Calculator calc = Calculator(
+                  height: height,
+                  weight: weight,
+                );
+    BMIResult _bmiResult = BMIResult(
+      resultBMIScore: await calc.calculateBMI(),
+      resultText: await calc.getResult(),
+      resultInterpretation: await calc.getInterpretation(),
+    );
+
+    // ignore: use_build_context_synchronously
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (_) => ResultScreen(
+          bmiResult: _bmiResult,
+        ),
+      ),
+    ).then((value) {
+      controller.reset();
+      controller.forward();
+    });
+}
 
   @override
   void initState() {
@@ -44,6 +72,7 @@ class _InputScreenState extends State<InputScreen> with SingleTickerProviderStat
 
   @override
   Widget build(BuildContext context) {
+
     return Scaffold(
       backgroundColor: AppColors.appPrimaryColor,
       appBar: AppBar(
@@ -266,16 +295,12 @@ class _InputScreenState extends State<InputScreen> with SingleTickerProviderStat
           ),
           BottomButton(
                 onTap: () async {
-                  if(selectedGender == Gender.other)
+                  if(selectedGender == Gender.other) {
                     showSnackBar(context, "Please choose your Gender");
-                    else 
-                    {
-                      Calculator calc = Calculator(
-                        height: height,
-                        weight: weight,
-                      );
-                    }
-                },
+                  } else {
+                    bmiResult();
+                  }
+                  },
                 buttonTitle: 'CALCULATE'),
         ],
       ),
