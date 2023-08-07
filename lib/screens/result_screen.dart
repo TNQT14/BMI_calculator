@@ -1,6 +1,7 @@
 import 'package:bmi_calculator/component/reusable_card.dart';
 import 'package:bmi_calculator/model/result.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../component/bottom_button.dart';
@@ -15,8 +16,13 @@ class ResultScreen extends StatelessWidget {
       SharedPreferences prefs = await SharedPreferences.getInstance();
 
       //List String
+      List<String> saveList = prefs.getStringList('saveList')??[]; 
       DateTime now  = DateTime.now();
-      await prefs.setStringList(now as String, <String>['bmi', 'status', 'colorStatus']);
+      String formatDate = DateFormat('yyyy-MM-dd -kk:mm').format(now);
+
+      saveList.add('{"bmi"}:"$bmi","status": "$status","statusColor":"$colorStatus","formatDate":"$formatDate');
+
+      await prefs.setStringList('saveList', saveList);
     } catch(e){
       e.toString();
     }
