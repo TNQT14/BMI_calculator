@@ -1,6 +1,7 @@
 import 'package:bmi_calculator/component/reusable_card.dart';
 import 'package:bmi_calculator/model/result.dart';
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import '../component/bottom_button.dart';
 import '../constants/app_styles.dart';
@@ -9,11 +10,23 @@ class ResultScreen extends StatelessWidget {
   const ResultScreen({Key? key, required this.bmiResult}): super(key: key);
   final BMIResult bmiResult;
 
+  void onSavedPressed(String bmi, String status, int colorStatus) async {
+    try{
+      SharedPreferences prefs = await SharedPreferences.getInstance();
+
+      //List String
+      DateTime now  = DateTime.now();
+      await prefs.setStringList(now as String, <String>['bmi', 'status', 'colorStatus']);
+    } catch(e){
+      e.toString();
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("BMI CALCULATOR"),
+        title: const Text("BMI CALCULATOR"),
         elevation: 0,
       ),
       body: Column(

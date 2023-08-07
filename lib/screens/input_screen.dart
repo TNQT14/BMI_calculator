@@ -34,7 +34,7 @@ class _InputScreenState extends State<InputScreen> with SingleTickerProviderStat
                   height: height,
                   weight: weight,
                 );
-    BMIResult _bmiResult = BMIResult(
+    BMIResult bmiResult = BMIResult(
       resultBMIScore: await calc.calculateBMI(),
       resultText: await calc.getResult(),
       resultInterpretation: await calc.getInterpretation(),
@@ -45,7 +45,7 @@ class _InputScreenState extends State<InputScreen> with SingleTickerProviderStat
       context,
       MaterialPageRoute(
         builder: (_) => ResultScreen(
-          bmiResult: _bmiResult,
+          bmiResult: bmiResult,
         ),
       ),
     ).then((value) {
