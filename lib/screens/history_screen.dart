@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:bmi_calculator/localization/app_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -28,7 +29,7 @@ class _HistoryScreenState extends State<HistoryScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title:const Center( child: Text("HISTORY")),
+        title:Center( child: Text(context.localize('label_history'))),
         elevation: 0,
         actions: [
           IconButton(onPressed: () async{

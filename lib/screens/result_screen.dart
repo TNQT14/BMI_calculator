@@ -1,4 +1,6 @@
+
 import 'package:bmi_calculator/component/reusable_card.dart';
+import 'package:bmi_calculator/localization/app_localization.dart';
 import 'package:bmi_calculator/model/result.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
@@ -25,14 +27,13 @@ class ResultScreen extends StatelessWidget {
     } catch(e){
       e.toString();
     }
-    print('{"bmi":"$bmi","status": "$status","statusColor":"$colorStatus","formatDate":""}');
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Center(child: Text("BMI CALCULATOR")),
+        title: Center(child: Text(context.localize('title'))),
         elevation: 0,
         actions: [
           IconButton(onPressed: (){
@@ -54,8 +55,8 @@ class ResultScreen extends StatelessWidget {
             child: Container(
               padding: const EdgeInsets.all(15.0),
               alignment: Alignment.bottomCenter,
-              child: const Text(
-                "Your Result",
+              child: Text(
+                context.localize('label_result'),
                 style: kTitleTextStyle,
               ),
             ),
@@ -87,7 +88,7 @@ class ResultScreen extends StatelessWidget {
             ),
           ),
           BottomButton(
-            buttonTitle: "RE-CALCULATOR",
+            buttonTitle: context.localize('label_recalculate'),
             onTap: () {
               Navigator.pop(context);
             },
