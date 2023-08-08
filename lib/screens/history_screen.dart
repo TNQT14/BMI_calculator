@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class HistoryScreen extends StatefulWidget {
   const HistoryScreen({super.key});
@@ -10,6 +11,19 @@ class HistoryScreen extends StatefulWidget {
 }
 
 class _HistoryScreenState extends State<HistoryScreen> {
+
+  Future<List<String>> getResultData() async{
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    List<String> saveList = prefs.getStringList('saveList')??[];
+    return saveList;
+  }
+
+  //Clear all Data
+  Future<void> deleteAll () async{
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    prefs.clear();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -17,7 +31,9 @@ class _HistoryScreenState extends State<HistoryScreen> {
         title: const Text("HISTORY"),
         elevation: 0,
         actions: [
-          IconButton(onPressed: (){},
+          IconButton(onPressed: () async{
+            deleteAll();
+          },
            icon: const Icon(Icons.delete_forever),
            ),
         ],
