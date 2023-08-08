@@ -3,8 +3,7 @@ import 'package:bmi_calculator/component/icon_content.dart';
 import 'package:bmi_calculator/component/reusable_card.dart';
 import 'package:bmi_calculator/component/round_icon_button.dart';
 import 'package:bmi_calculator/constants/app_styles.dart';
-import 'package:bmi_calculator/screens/history_screen.dart';
-import 'package:bmi_calculator/screens/result_screen.dart';
+import 'package:bmi_calculator/localization/app_localization.dart';
 import 'package:bmi_calculator/services/calculator.dart';
 import 'package:bmi_calculator/utils/widget_utils.dart';
 import 'package:flutter/material.dart';
@@ -27,6 +26,7 @@ class _InputScreenState extends State<InputScreen> with SingleTickerProviderStat
   int height = 180;
   int weight = 60;
   int age = 20;
+  bool isSwitched = false;
 
   late AnimationController controller;
 
@@ -53,8 +53,10 @@ class _InputScreenState extends State<InputScreen> with SingleTickerProviderStat
       backgroundColor: AppColors.appPrimaryColor,
       appBar: AppBar(
         backgroundColor: AppColors.appPrimaryColor,
-        title: const Center(child: Text("BMI CALCULATOR",
-        style: kLargeButtonTextStyle,)),
+        title: Center(child: Text(
+          context.localize('title'),
+          style: kLargeButtonTextStyle,)
+          ),
         elevation: 0,
         leading: IconButton(
           icon: const Icon(Icons.history),
@@ -103,7 +105,7 @@ class _InputScreenState extends State<InputScreen> with SingleTickerProviderStat
                             ? Colors.blueAccent
                             : Colors.white,
                           icon: Icons.male,
-                          label: 'MALE',
+                          label: context.localize('label_male'),
                         ),         
                     ),
                   ),
@@ -131,7 +133,7 @@ class _InputScreenState extends State<InputScreen> with SingleTickerProviderStat
                             ? Colors.orange
                             : Colors.white,
                         icon: Icons.female,
-                        label: 'FEMALE',
+                        label: context.localize('label_female'),
                       ),
                     ),
                   ),
@@ -153,7 +155,8 @@ class _InputScreenState extends State<InputScreen> with SingleTickerProviderStat
                 cardChild: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[
-                    const Text("Height",
+                    Text(
+                      context.localize('label_height'),
                       style: kLabelTextStyle,
                     ),
                     Row(
@@ -210,8 +213,8 @@ class _InputScreenState extends State<InputScreen> with SingleTickerProviderStat
                       cardChild: Column(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: <Widget>[
-                          const Text(
-                              'Weight',
+                          Text(
+                              context.localize('label_weight'),
                               style: kLabelTextStyle,
                             ),
                             Text(
@@ -254,8 +257,8 @@ class _InputScreenState extends State<InputScreen> with SingleTickerProviderStat
                       cardChild: Column(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: <Widget>[
-                          const Text(
-                              'Age',
+                          Text(
+                              context.localize('label_age'),
                               style: kLabelTextStyle,
                             ),
                             Text(
@@ -288,6 +291,20 @@ class _InputScreenState extends State<InputScreen> with SingleTickerProviderStat
               ],
             ),
           ),
+          Container(
+            child: SwitchListTile(
+              title: Text(context.localize('label_languages')),
+              value: isSwitched,
+              onChanged: (value){
+                setState(() {
+                  isSwitched = value;
+                  if(value == false) {
+                    
+                  }
+                });
+              },
+            )
+            ),
           BottomButton(
                 onTap: () async {
                   if(selectedGender == Gender.other) {
@@ -311,7 +328,7 @@ class _InputScreenState extends State<InputScreen> with SingleTickerProviderStat
                     
                   }
                   },
-                buttonTitle: 'CALCULATE'),
+                buttonTitle: context.localize('label_calculate')),
         ],
       ),
     );
