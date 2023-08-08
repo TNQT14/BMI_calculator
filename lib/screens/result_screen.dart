@@ -25,6 +25,7 @@ class ResultScreen extends StatelessWidget {
     } catch(e){
       e.toString();
     }
+    print('{"bmi":"$bmi","status": "$status","statusColor":"$colorStatus","formatDate":""}');
   }
 
   @override
@@ -35,8 +36,7 @@ class ResultScreen extends StatelessWidget {
         elevation: 0,
         actions: [
           IconButton(onPressed: (){
-            // ignore: unrelated_type_equality_checks
-            if(bmiResult == true){
+            if(bmiResult != null){
               onSavedPressed(
                 bmiResult.resultBMIScore,
                 bmiResult.resultText, 

@@ -12,6 +12,7 @@ import 'package:flutter/material.dart';
 import '../constants/app_color.dart';
 import '../model/gender.dart';
 import '../model/result.dart';
+import '../routes/routes.dart';
 
 class InputScreen extends StatefulWidget {
   const InputScreen({super.key});
@@ -28,34 +29,6 @@ class _InputScreenState extends State<InputScreen> with SingleTickerProviderStat
   int age = 20;
 
   late AnimationController controller;
-
-
-
-  void bmiResult() async {
-
-    Calculator calc = Calculator(
-                  height: height,
-                  weight: weight,
-                );
-    BMIResult bmiResult = BMIResult(
-      resultBMIScore: await calc.calculateBMI(),
-      resultText: await calc.getResult(),
-      resultInterpretation: await calc.getInterpretation(),
-    );
-
-    // ignore: use_build_context_synchronously
-    Navigator.push(
-      context,
-      MaterialPageRoute(
-        builder: (_) => ResultScreen(
-          bmiResult: bmiResult,
-        ),
-      ),
-    ).then((value) {
-      controller.reset();
-      controller.forward();
-    });
-}
 
   @override
   void initState() {
@@ -86,7 +59,7 @@ class _InputScreenState extends State<InputScreen> with SingleTickerProviderStat
         leading: IconButton(
           icon: const Icon(Icons.history),
           onPressed: () {
-            Navigator.push(context, MaterialPageRoute(builder: (_)=> const HistoryScreen()));
+            Navigator.pushNamed(context, RouteGenerator.historyScreen);
           },
         ),
         actions: [
@@ -320,7 +293,22 @@ class _InputScreenState extends State<InputScreen> with SingleTickerProviderStat
                   if(selectedGender == Gender.other) {
                     showSnackBar(context, "Please choose your Gender");
                   } else {
-                    bmiResult();
+                    Calculator calc = Calculator(
+                  height: height,
+                  weight: weight,
+                  );
+
+                  Navigator.pushNamed(
+                  context,
+                  RouteGenerator.resultScreen,
+                  arguments: BMIResult(
+                    resultBMIScore: await calc.calculateBMI(),
+                    resultText: await calc.getResult(),
+                    resultInterpretation: await calc.getInterpretation(),
+                    resultColor: await calc.getStatusColor(),
+                  ),
+                  );
+                    
                   }
                   },
                 buttonTitle: 'CALCULATE'),

@@ -1,11 +1,9 @@
-import 'package:bmi_calculator/screens/input_screen.dart';
+// import 'package:bmi_calculator/screens/input_screen.dart';
 import 'package:flutter/material.dart';
 import '../constants/app_color.dart';
 import '../constants/app_image_app.dart';
-// import '../utils/widget_utils.dart';
-// import 'input_screen.dart';
-
-
+import '../routes/routes.dart';
+import 'input_screen.dart';
 class SplashScreen extends StatefulWidget {
   const SplashScreen({Key? key}) : super(key: key);
 
@@ -15,7 +13,6 @@ class SplashScreen extends StatefulWidget {
 
 class _SplashScreenState extends State<SplashScreen>
     with SingleTickerProviderStateMixin {
-  // late AnimationController _submitAnimationController;
   static const int duration = 1;
 
   @override
@@ -23,8 +20,9 @@ class _SplashScreenState extends State<SplashScreen>
     super.initState();
     Future.delayed(const Duration(seconds: duration),
     (){
-      Navigator.pushReplacement(context, MaterialPageRoute(builder: (_)=>const InputScreen()));
+      Navigator.pushReplacementNamed(context, RouteGenerator.inputScreen);
     });
+    
   }
 
   @override
@@ -70,22 +68,9 @@ class _SplashScreenState extends State<SplashScreen>
                   fontWeight: FontWeight.w500,
                 ),
               ),
-              // Padding(
-              //   padding: EdgeInsets.only(
-              //     left: screenAwareSize(16.0, context),
-              //     right: screenAwareSize(16.0, context),
-              //     bottom: screenAwareSize(22.0, context),
-              //     top: screenAwareSize(14.0, context),
-              //   ),
-                // child: PacmanSlider(
-                //   submitAnimationController: _submitAnimationController,
-                //   onSubmit: onPacmanSubmit,
-                // ),
-              // ),
             ],
           ),
         ),
-        // TransitionDot(animation: _submitAnimationController),
       ],
     );
   }

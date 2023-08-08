@@ -1,37 +1,37 @@
 import 'package:bmi_calculator/screens/history_screen.dart';
 import 'package:bmi_calculator/screens/input_screen.dart';
+import 'package:bmi_calculator/screens/result_screen.dart';
+import 'package:bmi_calculator/screens/splash_screen.dart';
 import 'package:flutter/material.dart';
 
 import '../model/result.dart';
-import '../screens/result_screen.dart';
-import '../screens/splash_screen.dart';
+
 
 class RouteGenerator{
   const RouteGenerator._();
 
   static Route<dynamic> generatorRouter(RouteSettings setting){
     final args = setting.arguments;
-
     switch (setting.name)
     {
       case home:
         return MaterialPageRoute<InputScreen>(
-          builder: (_) => const InputScreen()
+          builder: (_) => const InputScreen(),
         );
-        case splash:
+        case splashScreen:
         return MaterialPageRoute<SplashScreen>(
           builder: (_) => const SplashScreen(),
         );
-      case resultPage:
+      case resultScreen:
           BMIResult result = args as BMIResult;
         return MaterialPageRoute<ResultScreen>(
           builder: (_) => ResultScreen(bmiResult: result,),
         );
-      case inputPage:
+      case inputScreen:
         return MaterialPageRoute<InputScreen>(
           builder: (_) => const InputScreen(),
         );
-      case historyPage:
+      case historyScreen:
         return MaterialPageRoute<InputScreen>(
           builder: (_) => const HistoryScreen(),
         );
@@ -41,15 +41,14 @@ class RouteGenerator{
   } 
 
   static const home = '/';
-  static const splash = 'splash';
-  static const inputPage = 'input';
-  static const resultPage = 'result';
-  static const historyPage = 'history';
+  static const splashScreen = 'splash';
+  static const inputScreen = 'input';
+  static const resultScreen = 'result';
+  static const historyScreen = 'history';
 }
 
 //Exception
 class RouteException implements Exception{
   final String message;
-
   const RouteException(this.message);
 }

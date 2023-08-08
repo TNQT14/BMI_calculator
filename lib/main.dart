@@ -1,3 +1,4 @@
+import 'package:bmi_calculator/routes/routes.dart';
 import 'package:bmi_calculator/screens/splash_screen.dart';
 import 'package:flutter/material.dart';
 
@@ -14,7 +15,6 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
       theme: ThemeData.dark().copyWith(
         primaryColor: AppColors.appPrimaryColor,
         appBarTheme: const AppBarTheme(
@@ -22,6 +22,8 @@ class MyApp extends StatelessWidget {
         ),
         scaffoldBackgroundColor: AppColors.appPrimaryColor,
       ),
+      initialRoute: RouteGenerator.splashScreen,
+      onGenerateRoute: RouteGenerator.generatorRouter,
       home: const SplashScreen(),
     );
   }
