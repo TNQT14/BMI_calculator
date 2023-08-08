@@ -19,8 +19,7 @@ class ResultScreen extends StatelessWidget {
       List<String> saveList = prefs.getStringList('saveList')??[]; 
       DateTime now  = DateTime.now();
       String formatDate = DateFormat('yyyy-MM-dd -kk:mm').format(now);
-
-      saveList.add('{"bmi"}:"$bmi","status": "$status","statusColor":"$colorStatus","formatDate":"$formatDate');
+      saveList.add('{"bmi":"$bmi","status": "$status","statusColor":"$colorStatus","formatDate":"$formatDate"}');
 
       await prefs.setStringList('saveList', saveList);
     } catch(e){
@@ -32,8 +31,20 @@ class ResultScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("BMI CALCULATOR"),
+        title: const Center(child: Text("BMI CALCULATOR")),
         elevation: 0,
+        actions: [
+          IconButton(onPressed: (){
+            // ignore: unrelated_type_equality_checks
+            if(bmiResult == true){
+              onSavedPressed(
+                bmiResult.resultBMIScore,
+                bmiResult.resultText, 
+                bmiResult.resultColor.value);
+            }
+          }, 
+          icon: const Icon(Icons.save))
+        ],
       ),
       body: Column(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,

@@ -3,11 +3,11 @@ import 'package:bmi_calculator/component/icon_content.dart';
 import 'package:bmi_calculator/component/reusable_card.dart';
 import 'package:bmi_calculator/component/round_icon_button.dart';
 import 'package:bmi_calculator/constants/app_styles.dart';
+import 'package:bmi_calculator/screens/history_screen.dart';
 import 'package:bmi_calculator/screens/result_screen.dart';
 import 'package:bmi_calculator/services/calculator.dart';
 import 'package:bmi_calculator/utils/widget_utils.dart';
 import 'package:flutter/material.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 import '../constants/app_color.dart';
 import '../model/gender.dart';
@@ -86,6 +86,7 @@ class _InputScreenState extends State<InputScreen> with SingleTickerProviderStat
         leading: IconButton(
           icon: const Icon(Icons.history),
           onPressed: () {
+            Navigator.push(context, MaterialPageRoute(builder: (_)=> const HistoryScreen()));
           },
         ),
         actions: [

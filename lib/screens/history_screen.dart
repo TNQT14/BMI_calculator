@@ -28,17 +28,37 @@ class _HistoryScreenState extends State<HistoryScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("HISTORY"),
+        title:const Center( child: Text("HISTORY")),
         elevation: 0,
         actions: [
           IconButton(onPressed: () async{
-            deleteAll();
+            setState(() {
+              deleteAll();
+            });
           },
            icon: const Icon(Icons.delete_forever),
            ),
         ],
       ),
-    );
+      body: FutureBuilder(
+        future: getResultData(),
+        builder: (_, AsyncSnapshot<dynamic> snapshot) {
+            if (snapshot.hasData && snapshot.connectionState == ConnectionState.done) {
+              List<String> resultList = snapshot.data ?? [];
+              return Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Expanded(
+                    child: resultList.isEmpty ? buildEmptyView() : buidListView(resultList),
+                  ),
+                ],
+              );
+            }
+            return const Center(
+              child: CircularProgressIndicator(),
+            );
+          }),
+      );
   }
 
   Widget buildEmptyView(){
@@ -54,9 +74,27 @@ class _HistoryScreenState extends State<HistoryScreen> {
         var resultItems = jsonDecode(result);
         return Card(
           shadowColor:  const Color(0xFF7776fe),
-          elevation: 0,
+          elevation: 3,
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(10),
+          ),
+          child: ListTile(
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(10),
+            ),
+            tileColor: Color(
+              int.parse(
+                resultItems['statusColor'],
+                radix: 16,
+              ),
+            ).withOpacity(0.3),
+            title: Text(resultItems['status']),
+            subtitle: Text(resultItems['formatDate']),
+            contentPadding: const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
+            leading: Text(
+              resultItems['bmi'],
+              style: const TextStyle(fontSize: 50, fontWeight: FontWeight.bold, color: Color(0xff5e5f61)),
+            ),
           ),
           
         );
