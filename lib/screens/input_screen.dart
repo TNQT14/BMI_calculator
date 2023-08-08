@@ -7,6 +7,7 @@ import 'package:bmi_calculator/screens/result_screen.dart';
 import 'package:bmi_calculator/services/calculator.dart';
 import 'package:bmi_calculator/utils/widget_utils.dart';
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import '../constants/app_color.dart';
 import '../model/gender.dart';
@@ -27,6 +28,8 @@ class _InputScreenState extends State<InputScreen> with SingleTickerProviderStat
   int age = 20;
 
   late AnimationController controller;
+
+
 
   void bmiResult() async {
 
@@ -72,7 +75,7 @@ class _InputScreenState extends State<InputScreen> with SingleTickerProviderStat
 
   @override
   Widget build(BuildContext context) {
-
+  
     return Scaffold(
       backgroundColor: AppColors.appPrimaryColor,
       appBar: AppBar(
