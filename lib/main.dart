@@ -17,6 +17,7 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
+    List<String> lang = ['vi', 'VN'];
     return MaterialApp(
       theme: ThemeData.dark().copyWith(
         primaryColor: AppColors.appPrimaryColor,
@@ -29,7 +30,7 @@ class MyApp extends StatelessWidget {
       onGenerateRoute: RouteGenerator.generatorRouter,
       home: const SplashScreen(),
       // locale: const Locale("vi", "VN"),
-      locale: const Locale("en", "EN"),
+      locale: Locale(lang[0], lang[1]),
       localizationsDelegates: const [
         AppLocalizationDelegate(),
         GlobalMaterialLocalizations.delegate,

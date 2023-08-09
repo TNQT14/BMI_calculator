@@ -3,22 +3,41 @@ import 'package:bmi_calculator/localization/app_localization.dart';
 import 'package:flutter/material.dart';
 
 import '../constants/app_color.dart';
+import '../main.dart';
+import '../routes/routes.dart';
 
-class LanguageWidget extends StatelessWidget {
-  const LanguageWidget({super.key});
+class LanguageWidget extends StatefulWidget {
+  const LanguageWidget({Key? key}) : super(key: key);
 
-  static String getLang(String code){
+  List<String> getLang(String code){
+    return ['vi', 'VN'];
+  }
+
+  @override
+  State<LanguageWidget> createState() => _LanguageWidget();
+}
+class _LanguageWidget extends State<LanguageWidget> {
+  
+  List<String> getLang(String code){
     switch(code){
-      case 'en':
-        return 'EN';
-      case 'vi':
-        return 'VI';
+      case 'English':
+        return ['en', 'EN']; 
+      case 'Tiếng Việt':
+        return ['vi', 'VI'];
       default:
-        return 'VI';
+        return ['vi', 'VI'];
     }
   }
-  
-  
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    Future.delayed(const Duration(seconds: 1),
+    (){
+      Navigator.pushReplacementNamed(context, RouteGenerator.inputScreen);
+    });
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -32,20 +51,15 @@ class LanguageWidget extends StatelessWidget {
         itemCount: pickerLang.length,
         itemBuilder: (context, index){
           return Container(
-            padding: EdgeInsets.fromLTRB(15, 0, 15, 0),
+            padding: const EdgeInsets.fromLTRB(15, 0, 15, 0),
             child: ElevatedButton(
-            //   color:  AppColors.appButtonColor,
-            //   elevation: 0,
-            //   shape: RoundedRectangleBorder(
-            //   borderRadius: BorderRadius.circular(0),
-            // ),
             style: ElevatedButton.styleFrom(
               backgroundColor:  AppColors.appButtonColor,
             ),
               child: Row(
                 children: <Widget>[
                   Container(
-                    padding: EdgeInsets.fromLTRB(50, 0, 0, 0),
+                    padding: const EdgeInsets.fromLTRB(50, 0, 0, 0),
                     child: Text(pickerLang[index],
                     style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: Color.fromARGB(255, 255, 255, 255))
                     ),
@@ -53,12 +67,17 @@ class LanguageWidget extends StatelessWidget {
                     const SizedBox(height: 40,),
                 ],
               ),
-              onPressed: (){},
+              onPressed: (){
+                setState(() {
+                  getLang(pickerLang[index]);
+                });
+
+              },
             ),
           );
-          
         }
         ),
     );
   }
+  
 }
