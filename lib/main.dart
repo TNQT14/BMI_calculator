@@ -11,13 +11,25 @@ void main() {
   runApp(const MyApp());
 }
 
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+class MyApp extends StatefulWidget {
+  const MyApp({Key? key}) : super(key: key);
 
+  @override
+  State<MyApp> createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     List<String> lang = ['vi', 'VN'];
+    
+    void updateLanguage(List<String> newLang) {
+    setState(() {
+      lang = newLang;
+    });
+  }
+
     return MaterialApp(
       theme: ThemeData.dark().copyWith(
         primaryColor: AppColors.appPrimaryColor,

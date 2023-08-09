@@ -31,11 +31,8 @@ class _LanguageWidget extends State<LanguageWidget> {
 
   @override
   void initState() {
+    
     // TODO: implement initState
-    Future.delayed(const Duration(seconds: 1),
-    (){
-      Navigator.pushReplacementNamed(context, RouteGenerator.inputScreen);
-    });
     super.initState();
   }
 
@@ -69,7 +66,8 @@ class _LanguageWidget extends State<LanguageWidget> {
               ),
               onPressed: (){
                 setState(() {
-                  getLang(pickerLang[index]);
+                  List<String> newLang = getLang(pickerLang[index]);
+                  print(getLang(pickerLang[index]));
                 });
 
               },
