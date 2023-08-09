@@ -31,27 +31,30 @@ class LanguageWidget extends StatelessWidget {
       body: ListView.builder(
         itemCount: pickerLang.length,
         itemBuilder: (context, index){
-          return ElevatedButton(
-          //   color:  AppColors.appButtonColor,
-          //   elevation: 0,
-          //   shape: RoundedRectangleBorder(
-          //   borderRadius: BorderRadius.circular(0),
-          // ),
-          style: ElevatedButton.styleFrom(
-            backgroundColor:  AppColors.appButtonColor,
-          ),
-            child: Row(
-              children: <Widget>[
-                Container(
-                  padding: EdgeInsets.fromLTRB(50, 0, 0, 0),
-                  child: Text(pickerLang[index],
-                  style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: Color.fromARGB(255, 255, 255, 255))
-                  ),
-                  ),
-                  const SizedBox(height: 40,),
-              ],
+          return Container(
+            padding: EdgeInsets.fromLTRB(15, 0, 15, 0),
+            child: ElevatedButton(
+            //   color:  AppColors.appButtonColor,
+            //   elevation: 0,
+            //   shape: RoundedRectangleBorder(
+            //   borderRadius: BorderRadius.circular(0),
+            // ),
+            style: ElevatedButton.styleFrom(
+              backgroundColor:  AppColors.appButtonColor,
             ),
-            onPressed: (){},
+              child: Row(
+                children: <Widget>[
+                  Container(
+                    padding: EdgeInsets.fromLTRB(50, 0, 0, 0),
+                    child: Text(pickerLang[index],
+                    style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: Color.fromARGB(255, 255, 255, 255))
+                    ),
+                    ),
+                    const SizedBox(height: 40,),
+                ],
+              ),
+              onPressed: (){},
+            ),
           );
           
         }

@@ -48,8 +48,6 @@ class _InputScreenState extends State<InputScreen> with SingleTickerProviderStat
 
   @override
   Widget build(BuildContext context) {
-    final local = Localizations.localeOf(context);
-  
     return Scaffold(
       backgroundColor: AppColors.appPrimaryColor,
       appBar: AppBar(

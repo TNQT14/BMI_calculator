@@ -1,3 +1,4 @@
+import 'package:bmi_calculator/routes/fade_routes.dart';
 import 'package:bmi_calculator/screens/history_screen.dart';
 import 'package:bmi_calculator/screens/input_screen.dart';
 import 'package:bmi_calculator/screens/result_screen.dart';
@@ -29,9 +30,10 @@ class RouteGenerator{
           builder: (_) => ResultScreen(bmiResult: result,),
         );
       case inputScreen:
-        return MaterialPageRoute<InputScreen>(
-          builder: (_) => const InputScreen(),
-        );
+        // return MaterialPageRoute<InputScreen>(
+        //   builder: (_) => const InputScreen(),
+        // );
+        return FadeRoute(builder: (_)=>const InputScreen(), settings: setting);
       case historyScreen:
         return MaterialPageRoute<InputScreen>(
           builder: (_) => const HistoryScreen(),
