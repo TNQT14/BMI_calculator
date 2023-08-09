@@ -2,6 +2,7 @@ import 'package:bmi_calculator/screens/history_screen.dart';
 import 'package:bmi_calculator/screens/input_screen.dart';
 import 'package:bmi_calculator/screens/result_screen.dart';
 import 'package:bmi_calculator/screens/splash_screen.dart';
+import 'package:bmi_calculator/utils/widget_language_picker.dart';
 import 'package:flutter/material.dart';
 
 import '../model/result.dart';
@@ -35,6 +36,10 @@ class RouteGenerator{
         return MaterialPageRoute<InputScreen>(
           builder: (_) => const HistoryScreen(),
         );
+      case languageScreen:
+        return MaterialPageRoute<LanguageWidget>(
+          builder: (_) =>  LanguageWidget(),
+        );
       default: 
         throw const RouteException('Route not found');
     }
@@ -45,6 +50,7 @@ class RouteGenerator{
   static const inputScreen = 'input';
   static const resultScreen = 'result';
   static const historyScreen = 'history';
+  static const languageScreen = 'language';
 }
 
 //Exception

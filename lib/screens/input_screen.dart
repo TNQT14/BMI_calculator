@@ -48,6 +48,7 @@ class _InputScreenState extends State<InputScreen> with SingleTickerProviderStat
 
   @override
   Widget build(BuildContext context) {
+    final local = Localizations.localeOf(context);
   
     return Scaffold(
       backgroundColor: AppColors.appPrimaryColor,
@@ -292,18 +293,13 @@ class _InputScreenState extends State<InputScreen> with SingleTickerProviderStat
             ),
           ),
           Container(
-            child: SwitchListTile(
-              title: Text(context.localize('label_languages')),
-              value: isSwitched,
-              onChanged: (value){
-                setState(() {
-                  isSwitched = value;
-                  if(value == false) {
-                    
-                  }
-                });
+            child: ElevatedButton(
+              // style: ElevatedButton.styleFrom(onSurface: Colors.red),
+              onPressed: (){
+                Navigator.pushNamed(context, RouteGenerator.languageScreen);
               },
-            )
+              child: Text(context.localize('label_lang')),
+            ),
             ),
           BottomButton(
                 onTap: () async {

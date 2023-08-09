@@ -97,7 +97,6 @@ class _HistoryScreenState extends State<HistoryScreen> {
               style: const TextStyle(fontSize: 50, fontWeight: FontWeight.bold, color: Color(0xff5e5f61)),
             ),
           ),
-          
         );
       },
       separatorBuilder: (_,index){

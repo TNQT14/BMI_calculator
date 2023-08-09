@@ -36,7 +36,8 @@ class AppLocalization {
       "label_age": "AGE",
       "label_result": "Your Result",
       "label_history": "HISTORY",
-      "label_languages": "English"
+      "label_languages": "English",
+      "label_lang": "LANGUAGES",
     },
     "vi": {
       "title": "Máy tính BMI",
@@ -50,6 +51,7 @@ class AppLocalization {
       "label_result": "KẾT QUẢ",
       "label_history": "LỊCH SỬ",
       "label_languages": "Tiếng Việt",
+      "label_lang": "NGÔN NGỮ",
     },
   };
 }
