@@ -53,6 +53,7 @@ class _MyAppState extends State<MyApp> {
       supportedLocales: const [
         Locale.fromSubtags(languageCode: "en"),
         Locale.fromSubtags(languageCode: "vi"),
+        //aa
       ],
       onGenerateTitle: (context) => context.localize("title"),
     );
