@@ -38,6 +38,7 @@ class _MyAppState extends State<MyApp> {
         ),
         scaffoldBackgroundColor: AppColors.appPrimaryColor,
       ),
+      debugShowCheckedModeBanner: false,
       initialRoute: RouteGenerator.splashScreen,
       onGenerateRoute: RouteGenerator.generatorRouter,
       home: const SplashScreen(),

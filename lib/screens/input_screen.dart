@@ -290,15 +290,15 @@ class _InputScreenState extends State<InputScreen> with SingleTickerProviderStat
               ],
             ),
           ),
-          Container(
-            child: ElevatedButton(
-              // style: ElevatedButton.styleFrom(onSurface: Colors.red),
-              onPressed: (){
-                Navigator.pushNamed(context, RouteGenerator.languageScreen);
-              },
-              child: Text(context.localize('label_lang')),
-            ),
-            ),
+          // Container(
+          //   child: ElevatedButton(
+          //     // style: ElevatedButton.styleFrom(onSurface: Colors.red),
+          //     onPressed: (){
+          //       Navigator.pushNamed(context, RouteGenerator.languageScreen);
+          //     },
+          //     child: Text(context.localize('label_lang')),
+          //   ),
+          //   ),
           BottomButton(
                 onTap: () async {
                   if(selectedGender == Gender.other) {
